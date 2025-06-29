@@ -2,6 +2,8 @@ New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=NDTestCert" -CertSt
 
 Export-PfxCertificate -Cert Cert:\CurrentUser\My\AB28CE0D2F80B06DA2F80C787C27894EE35BA08F -FilePath "D:\Env\Certs\nd\NDTestCert.pfx" -Password $password
 
+$cert = Get-PfxCertificate -FilePath "D:\Env\Certs\nd\NDTestCert.pfx" -Password (ConvertTo-SecureString -String "NDPass123" -Force -AsPlainText)
+
 $store = New-Object System.Security.Cryptography.X509Certificates.X509Store("Root", "LocalMachine")
 
 $store.Open("ReadWrite")
